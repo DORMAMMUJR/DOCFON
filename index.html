@@ -4,11 +4,30 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DOCFON - Aprende, repara y abre tu propia sucursal tecnológica</title>
+    
+    <!-- SEO Primario -->
+    <title>DOCFON | Ecosistema Tecnológico de Reparación en México</title>
+    <meta name="description" content="Academia técnica certificada, marketplace de refacciones y franquicias tecnológicas de alta rentabilidad. Únete a la red líder en México.">
+    <meta name="keywords" content="reparación celulares, academia técnica, franquicias méxico, refacciones iphone, docfon, teikon pos">
+    <meta name="author" content="DOCFON Global">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://docfon.mx/">
+    <meta property="og:title" content="DOCFON - El futuro de la reparación tecnológica">
+    <meta property="og:description" content="Aprende, repara y abre tu propia sucursal. El ecosistema completo para emprendedores tech.">
+    <meta property="og:image" content="https://docfon.mx/og-image.jpg">
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:title" content="DOCFON | Ecosistema Tech">
+    <meta property="twitter:description" content="Únete a la red de técnicos más grande de México. Marketplace y Franquicias.">
+    
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
     <style>
         body { font-family: 'Inter', sans-serif; }
         .gradient-text {
@@ -17,30 +36,37 @@
             -webkit-text-fill-color: transparent;
         }
         .neon-orange {
-            box-shadow: 0 0 15px rgba(255, 107, 0, 0.4);
+            box-shadow: 0 0 20px rgba(255, 107, 0, 0.2);
         }
         .glass-card {
-            background: rgba(255, 255, 255, 0.03);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            background: rgba(255, 255, 255, 0.02);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
         }
-        ::-webkit-scrollbar { width: 8px; }
-        ::-webkit-scrollbar-track { background: #0a0a0a; }
-        ::-webkit-scrollbar-thumb { background: #333; border-radius: 4px; }
-        ::-webkit-scrollbar-thumb:hover { background: #444; }
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: #000; }
+        ::-webkit-scrollbar-thumb { background: #222; border-radius: 10px; }
+        ::-webkit-scrollbar-thumb:hover { background: #FF6B00; }
+        
+        @keyframes float {
+          0%, 100% { transform: translateY(0); }
+          50% { transform: translateY(-10px); }
+        }
+        .animate-float { animation: float 4s ease-in-out infinite; }
     </style>
-<script type="importmap">
-{
-  "imports": {
-    "react/": "https://esm.sh/react@^19.2.4/",
-    "react": "https://esm.sh/react@^19.2.4",
-    "react-dom/": "https://esm.sh/react-dom@^19.2.4/",
-    "react-router-dom": "https://esm.sh/react-router-dom@^7.13.0"
-  }
-}
-</script>
+
+    <script type="importmap">
+    {
+      "imports": {
+        "react/": "https://esm.sh/react@^19.2.4/",
+        "react": "https://esm.sh/react@^19.2.4",
+        "react-dom/": "https://esm.sh/react-dom@^19.2.4/",
+        "react-router-dom": "https://esm.sh/react-router-dom@^7.13.0"
+      }
+    }
+    </script>
 </head>
-<body class="bg-black text-white selection:bg-orange-500 selection:text-white">
+<body class="bg-black text-white selection:bg-orange-500 selection:text-white antialiased">
     <div id="root"></div>
 </body>
 </html>
