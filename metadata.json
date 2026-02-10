@@ -1,0 +1,8 @@
+{
+  "name": "DOCFON - Ecosistema Tecnológico de Reparación",
+  "description": "Plataforma integral para servicios de reparación, academia técnica, marketplace y red de franquicias tecnológicas en México.",
+  "requestFramePermissions": [
+    "camera",
+    "microphone"
+  ]
+}
