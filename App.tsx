@@ -1,6 +1,6 @@
 
 import React, { useState, useEffect } from 'react';
-import { HashRouter, Routes, Route, Link, useLocation } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, Link, useLocation } from 'react-router-dom';
 import Home from './pages/Home';
 import Academia from './pages/Academia';
 import Marketplace from './pages/Marketplace';
@@ -64,7 +64,6 @@ const Footer: React.FC = () => (
           El ecosistema líder en reparación tecnológica y educación técnica en México. Impulsando la nueva generación de emprendedores tecnológicos.
         </p>
         <div className="flex space-x-4">
-          {/* Social Icons Placeholder */}
           <div className="w-8 h-8 rounded-full bg-white/5 border border-white/10 flex items-center justify-center hover:bg-orange-500 transition-colors cursor-pointer">
             <span className="text-xs">FB</span>
           </div>
@@ -116,7 +115,7 @@ const Footer: React.FC = () => (
 
 const App: React.FC = () => {
   return (
-    <HashRouter>
+    <BrowserRouter>
       <Navbar />
       <main className="min-h-screen">
         <Routes>
@@ -129,7 +128,6 @@ const App: React.FC = () => {
       </main>
       <Footer />
       
-      {/* Floating WhatsApp Action */}
       <a 
         href="https://wa.me/521000000000" 
         target="_blank" 
@@ -138,7 +136,7 @@ const App: React.FC = () => {
       >
         <Icons.Whatsapp className="w-8 h-8" />
       </a>
-    </HashRouter>
+    </BrowserRouter>
   );
 };
 
