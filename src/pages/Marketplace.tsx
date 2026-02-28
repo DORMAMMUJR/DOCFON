@@ -1,7 +1,7 @@
-
 import React, { useState } from 'react';
 import { Icons } from '../constants';
 import { Product } from '../types';
+import { useCartStore } from '../store/useCartStore';
 
 const products: Product[] = [
     { id: '1', name: 'Pantalla iPhone 13 Pro Max (OLED)', category: 'Displays', price: 3200, image: 'https://picsum.photos/400/400?item=1' },
@@ -14,6 +14,7 @@ const products: Product[] = [
 
 const Marketplace: React.FC = () => {
     const [activeCategory, setActiveCategory] = useState('Todos');
+    const addToCart = useCartStore((state) => state.addToCart);
     const categories = ['Todos', 'Refacciones', 'Displays', 'Herramientas', 'Equipamiento', 'Accesorios'];
 
     return (
@@ -68,7 +69,16 @@ const Marketplace: React.FC = () => {
                                         <span className="text-2xl font-black italic">${product.price.toLocaleString()}</span>
                                         <span className="text-[10px] text-gray-500">I.V.A Incluido</span>
                                     </div>
-                                    <button className="w-12 h-12 bg-white text-black rounded-xl flex items-center justify-center hover:bg-orange-500 hover:text-white transition-colors">
+                                    <button
+                                        onClick={() => {
+                                            addToCart(product);
+                                            console.log(`Producto agregado al carrito: ${product.name}`);
+                                            // You can replace this alert with a proper Toast component if you have one
+                                            alert(`¡Agregado al carrito!\n${product.name}`);
+                                        }}
+                                        className="w-12 h-12 bg-white text-black rounded-xl flex items-center justify-center hover:bg-orange-500 hover:text-white transition-colors"
+                                        title="Agregar al carrito"
+                                    >
                                         <Icons.Cart className="w-5 h-5" />
                                     </button>
                                 </div>
