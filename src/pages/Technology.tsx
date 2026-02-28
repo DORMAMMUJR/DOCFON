@@ -1,7 +1,8 @@
 import React from 'react';
 
-import teikonImg from '@/assets/technology/teikon-preview.png';
-import visoImg from '@/assets/technology/viso-preview.png';
+import teikonDashboardImg from '@/assets/technology/teikon-dashboard.jpg';
+import teikonLogoImg from '@/assets/technology/teikon-logo.png';
+import visoRobotImg from '@/assets/technology/viso-robot.png';
 
 const Technology: React.FC = () => {
     return (
@@ -18,14 +19,10 @@ const Technology: React.FC = () => {
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center mb-40">
                     <div className="order-2 lg:order-1 relative">
                         <div className="aspect-video bg-gradient-to-br from-blue-900 to-black rounded-[40px] border border-blue-500/30 flex items-center justify-center overflow-hidden shadow-[0_0_40px_rgba(59,130,246,0.3)]">
-                            <img src={teikonImg} alt="Teikon POS" className="w-full h-full object-cover" />
+                            <img src={teikonDashboardImg} alt="Teikon POS" className="w-full h-full object-cover" />
                         </div>
-                        <div className="absolute -bottom-10 -right-10 bg-white text-black p-8 rounded-3xl shadow-2xl max-w-xs border-4 border-blue-500">
-                            <p className="font-black text-2xl italic">TEIKON</p>
-                            <p className="text-xs font-bold text-gray-500 uppercase">POS &amp; INVENTORY</p>
-                            <div className="mt-4 flex gap-2">
-                                {[1, 2, 3, 4].map(i => <div key={i} className="h-2 w-full bg-blue-100 rounded-full"></div>)}
-                            </div>
+                        <div className="absolute -bottom-10 -right-10 bg-black text-white p-6 rounded-3xl shadow-2xl max-w-xs border border-blue-500/50 flex flex-col items-center">
+                            <img src={teikonLogoImg} alt="Teikon Logo" className="w-24 h-24 object-contain drop-shadow-[0_0_15px_rgba(59,130,246,0.6)]" />
                         </div>
                     </div>
                     <div className="order-1 lg:order-2 space-y-8">
@@ -64,14 +61,14 @@ const Technology: React.FC = () => {
                     </div>
                     <div className="relative">
                         <div className="aspect-video bg-gradient-to-br from-fuchsia-900 to-black rounded-[40px] border border-fuchsia-500/30 flex items-center justify-center overflow-hidden shadow-[0_0_40px_rgba(236,72,153,0.3)] p-4">
-                            <img src={visoImg} alt="Viso CRM" className="w-full h-full object-contain drop-shadow-[0_0_15px_rgba(236,72,153,0.8)]" />
+                            <img src={visoRobotImg} alt="Viso CRM Robot" className="w-full h-full object-contain drop-shadow-[0_0_15px_rgba(236,72,153,0.8)]" />
                         </div>
-                        <div className="absolute -top-10 -left-10 bg-black text-white p-8 rounded-3xl shadow-2xl max-w-xs border-4 border-fuchsia-500">
+                        <div className="absolute -top-10 -left-10 bg-black text-white p-6 rounded-3xl shadow-2xl max-w-xs border-4 border-fuchsia-500">
                             <p className="font-black text-2xl italic">VISO</p>
                             <p className="text-xs font-bold text-gray-500 uppercase">WHATSAPP &amp; CRM</p>
                             <div className="mt-4 space-y-2">
-                                <div className="h-2 w-full bg-orange-500/20 rounded-full"></div>
-                                <div className="h-2 w-3/4 bg-orange-500/20 rounded-full"></div>
+                                <div className="h-2 w-full bg-fuchsia-500/20 rounded-full"></div>
+                                <div className="h-2 w-3/4 bg-fuchsia-500/20 rounded-full"></div>
                             </div>
                         </div>
                     </div>
