@@ -1,10 +1,10 @@
 import React from 'react';
 import { Course } from '../types';
 
-import portadaImg from '@/assets/academia/portada.png';
-import imgDisplay from '@/assets/academia/curso-display.png';
-import imgSoldadura from '@/assets/academia/curso-soldadura.png';
-import imgOxxo from '@/assets/academia/modelo-oxxo.png';
+import imgSoldadura from '@/assets/academia/microsoldadura.jpg';
+import imgDisplay from '@/assets/academia/display.png';
+import imgMultimarca from '@/assets/academia/multimarca.jpg';
+import imgSoftware from '@/assets/academia/software.jpg';
 
 const courses: Course[] = [
     {
@@ -31,7 +31,7 @@ const courses: Course[] = [
         level: 'Básico',
         duration: '32 Horas',
         price: 2900,
-        image: 'https://picsum.photos/600/400?electronics=3',
+        image: imgMultimarca,
         description: 'Fundamentos de electrónica aplicados a dispositivos móviles de todas las gamas.'
     },
     {
@@ -40,7 +40,7 @@ const courses: Course[] = [
         level: 'Intermedio',
         duration: '24 Horas',
         price: 3200,
-        image: 'https://picsum.photos/600/400?electronics=4',
+        image: imgSoftware,
         description: 'Flasheo, recuperación de sistema y bypass avanzado bajo marcos legales.'
     }
 ];
@@ -51,7 +51,7 @@ const Academia: React.FC = () => {
             {/* Header / Hero Banner */}
             <section className="max-w-7xl mx-auto px-6 mb-20 text-center">
                 <div className="relative w-full h-80 md:h-[500px] rounded-[40px] overflow-hidden mb-12 border border-white/10 shadow-2xl">
-                    <img src={portadaImg} alt="Academia DOCFON Portada" className="w-full h-full object-cover" />
+                    <img src="https://images.unsplash.com/photo-1581092160562-40aa08e78837?auto=format&fit=crop&q=80" alt="Academia DOCFON Portada" className="w-full h-full object-cover" />
                     <div className="absolute inset-0 bg-gradient-to-t from-black via-black/60 to-transparent flex flex-col justify-end p-8 md:p-16 text-center">
                         <h1 className="text-5xl md:text-7xl font-black italic mb-6">Academia <span className="text-orange-500">DOCFON</span></h1>
                         <p className="text-xl text-gray-200 max-w-2xl mx-auto drop-shadow-lg font-medium">
@@ -115,7 +115,7 @@ const Academia: React.FC = () => {
                     </div>
                     <div className="rounded-[30px] overflow-hidden border border-white/10 shadow-2xl relative group">
                         <div className="absolute inset-0 bg-blue-500/10 group-hover:bg-transparent transition-all z-10 pointer-events-none"></div>
-                        <img src={imgOxxo} alt="Modelo Oxxo Style DOCFON" className="w-full h-auto object-cover group-hover:scale-105 transition-transform duration-700" />
+                        <img src="https://images.unsplash.com/photo-1542744173-8e7e53415bb0?auto=format&fit=crop&q=80" alt="Modelo Oxxo Style DOCFON" className="w-full h-auto object-cover group-hover:scale-105 transition-transform duration-700" />
                     </div>
                 </div>
             </section>
