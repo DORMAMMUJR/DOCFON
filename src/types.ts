@@ -13,7 +13,8 @@ export interface Product {
     name: string;
     category: string;
     price: number;
-    image: string;
+    image: string; // Maintain for backward compatibility if needed temporarily, or I should update Marketplace if it breaks
+    images: string[];
     isBulk?: boolean;
 }
 

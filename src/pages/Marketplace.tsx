@@ -3,6 +3,120 @@ import { Icons } from '../constants';
 import { Product } from '../types';
 import { useCartStore } from '../store/useCartStore';
 
+import CentroCarga1 from '../assets/marketplace/refacciones/centro_de_carga_1.jpg';
+import CentroCarga2 from '../assets/marketplace/refacciones/centro_de_carga_2.jpg';
+import CentroCarga3 from '../assets/marketplace/refacciones/centro_de_carga_3.jpg';
+
+import Display1 from '../assets/marketplace/displays/display_1.jpg';
+import Display2 from '../assets/marketplace/displays/display_2.jpg';
+import Display3 from '../assets/marketplace/displays/display_3.jpg';
+
+import Herramienta1 from '../assets/marketplace/herramientas/pistola_calor_1.jpg';
+import Herramienta2 from '../assets/marketplace/herramientas/pistola_calor_2.jpg';
+
+import Equipamiento1 from '../assets/marketplace/equipamiento/Kit_herramienta.jpg';
+
+import Accesorio1 from '../assets/marketplace/accesorios/Funda_iPhone 17_1.jpg';
+import Accesorio2 from '../assets/marketplace/accesorios/Funda_iPhone 17_2.jpg';
+import Accesorio3 from '../assets/marketplace/accesorios/Funda_iPhone17_3.jpg';
+
+const MOCK_PRODUCTS: Product[] = [
+    {
+        id: '1',
+        name: 'Centro de Carga',
+        category: 'Refacciones',
+        price: 250,
+        image: CentroCarga1,
+        images: [CentroCarga1, CentroCarga2, CentroCarga3]
+    },
+    {
+        id: '2',
+        name: 'Display iPhone',
+        category: 'Displays',
+        price: 1200,
+        image: Display1,
+        images: [Display1, Display2, Display3]
+    },
+    {
+        id: '3',
+        name: 'Pistola de Calor',
+        category: 'Herramientas',
+        price: 850,
+        image: Herramienta1,
+        images: [Herramienta1, Herramienta2, Herramienta1]
+    },
+    {
+        id: '4',
+        name: 'Kit de Herramientas',
+        category: 'Equipamiento',
+        price: 500,
+        image: Equipamiento1,
+        images: [Equipamiento1, Equipamiento1, Equipamiento1]
+    },
+    {
+        id: '5',
+        name: 'Funda iPhone 17',
+        category: 'Accesorios',
+        price: 150,
+        image: Accesorio1,
+        images: [Accesorio1, Accesorio2, Accesorio3]
+    }
+];
+
+const ProductCard = ({ product, addToCart }: { product: Product, addToCart: (p: Product) => void }) => {
+    const [mainImage, setMainImage] = useState(product.images && product.images.length > 0 ? product.images[0] : product.image);
+
+    return (
+        <div className="group bg-white/5 border border-white/10 rounded-3xl overflow-hidden hover:border-white/30 transition-all flex flex-col">
+            <div className="aspect-square relative flex flex-col bg-gray-900 overflow-hidden">
+                <div className="flex-1 w-full h-full relative">
+                    <img src={mainImage} alt={product.name} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" />
+                    {product.isBulk && (
+                        <div className="absolute top-4 right-4 bg-blue-600 text-white text-[10px] font-black px-3 py-1 rounded-full uppercase z-10">
+                            MAYOREO
+                        </div>
+                    )}
+                </div>
+                {/* Thumbnails */}
+                {product.images && product.images.length > 1 && (
+                    <div className="absolute bottom-0 left-0 right-0 flex bg-gradient-to-t from-black/80 to-transparent p-4 gap-3 justify-center z-10 mt-auto">
+                        {product.images.map((img, idx) => (
+                            <button
+                                key={idx}
+                                onClick={(e) => { e.stopPropagation(); setMainImage(img); }}
+                                className={`w-14 h-14 rounded-xl overflow-hidden border-2 transition-all shadow-lg ${mainImage === img ? 'border-blue-500 scale-110' : 'border-transparent opacity-60 hover:opacity-100 hover:scale-105'}`}
+                            >
+                                <img src={img} alt={`Thumb ${idx}`} className="w-full h-full object-cover" />
+                            </button>
+                        ))}
+                    </div>
+                )}
+            </div>
+            <div className="p-6 flex flex-col flex-1">
+                <span className="text-[10px] text-gray-500 font-bold uppercase tracking-widest mb-2">{product.category}</span>
+                <h3 className="text-lg font-bold mb-4 line-clamp-2">{product.name}</h3>
+                <div className="mt-auto flex items-center justify-between">
+                    <div className="flex flex-col">
+                        <span className="text-2xl font-black italic">${parseFloat(product.price.toString()).toLocaleString()}</span>
+                        <span className="text-[10px] text-gray-500">I.V.A Incluido</span>
+                    </div>
+                    <button
+                        onClick={() => {
+                            addToCart(product);
+                            console.log(`Producto agregado al carrito: ${product.name}`);
+                            alert(`¡Agregado al carrito!\n${product.name}`);
+                        }}
+                        className="w-12 h-12 bg-white text-black rounded-xl flex items-center justify-center hover:bg-orange-500 hover:text-white transition-colors"
+                        title="Agregar al carrito"
+                    >
+                        <Icons.Cart className="w-5 h-5" />
+                    </button>
+                </div>
+            </div>
+        </div>
+    );
+};
+
 const Marketplace: React.FC = () => {
     const [products, setProducts] = useState<Product[]>([]);
     const [loading, setLoading] = useState(true);
@@ -23,7 +137,8 @@ const Marketplace: React.FC = () => {
                 setProducts(data);
             } catch (err) {
                 console.error("Failed to fetch products:", err);
-                setError("No se pudieron cargar los productos. Por favor intenta más tarde.");
+                setProducts(MOCK_PRODUCTS);
+                // setError("No se pudieron cargar los productos. Por favor intenta más tarde.");
             } finally {
                 setLoading(false);
             }
@@ -77,37 +192,7 @@ const Marketplace: React.FC = () => {
                 ) : (
                     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
                         {products.filter(p => activeCategory === 'Todos' || p.category === activeCategory).map(product => (
-                            <div key={product.id} className="group bg-white/5 border border-white/10 rounded-3xl overflow-hidden hover:border-white/30 transition-all flex flex-col">
-                                <div className="aspect-square relative overflow-hidden bg-gray-900">
-                                    <img src={product.image} alt={product.name} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" />
-                                    {product.isBulk && (
-                                        <div className="absolute top-4 right-4 bg-blue-600 text-white text-[10px] font-black px-3 py-1 rounded-full uppercase">
-                                            MAYOREO
-                                        </div>
-                                    )}
-                                </div>
-                                <div className="p-6 flex flex-col flex-1">
-                                    <span className="text-[10px] text-gray-500 font-bold uppercase tracking-widest mb-2">{product.category}</span>
-                                    <h3 className="text-lg font-bold mb-4 line-clamp-2">{product.name}</h3>
-                                    <div className="mt-auto flex items-center justify-between">
-                                        <div className="flex flex-col">
-                                            <span className="text-2xl font-black italic">${parseFloat(product.price.toString()).toLocaleString()}</span>
-                                            <span className="text-[10px] text-gray-500">I.V.A Incluido</span>
-                                        </div>
-                                        <button
-                                            onClick={() => {
-                                                addToCart(product);
-                                                console.log(`Producto agregado al carrito: ${product.name}`);
-                                                alert(`¡Agregado al carrito!\n${product.name}`);
-                                            }}
-                                            className="w-12 h-12 bg-white text-black rounded-xl flex items-center justify-center hover:bg-orange-500 hover:text-white transition-colors"
-                                            title="Agregar al carrito"
-                                        >
-                                            <Icons.Cart className="w-5 h-5" />
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
+                            <ProductCard key={product.id} product={product} addToCart={addToCart} />
                         ))}
                     </div>
                 )}
