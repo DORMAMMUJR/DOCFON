@@ -1,5 +1,7 @@
-
 import React from 'react';
+
+import teikonImg from '@/assets/technology/teikon-preview.png';
+import visoImg from '@/assets/technology/viso-preview.png';
 
 const Technology: React.FC = () => {
     return (
@@ -15,13 +17,8 @@ const Technology: React.FC = () => {
                 {/* TEIKON Section */}
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center mb-40">
                     <div className="order-2 lg:order-1 relative">
-                        <div className="aspect-video bg-gradient-to-br from-blue-900 to-black rounded-[40px] border border-white/10 flex items-center justify-center overflow-hidden">
-                            <img src="https://picsum.photos/1200/800?dashboard=1" alt="Teikon POS" className="w-full h-full object-cover opacity-50" />
-                            <div className="absolute inset-0 bg-blue-600/10 flex flex-col justify-center p-12 space-y-4">
-                                <div className="h-4 w-1/3 bg-blue-500 rounded-full"></div>
-                                <div className="h-4 w-2/3 bg-white/20 rounded-full"></div>
-                                <div className="h-4 w-1/2 bg-white/20 rounded-full"></div>
-                            </div>
+                        <div className="aspect-video bg-gradient-to-br from-blue-900 to-black rounded-[40px] border border-blue-500/30 flex items-center justify-center overflow-hidden shadow-[0_0_40px_rgba(59,130,246,0.3)]">
+                            <img src={teikonImg} alt="Teikon POS" className="w-full h-full object-cover" />
                         </div>
                         <div className="absolute -bottom-10 -right-10 bg-white text-black p-8 rounded-3xl shadow-2xl max-w-xs border-4 border-blue-500">
                             <p className="font-black text-2xl italic">TEIKON</p>
@@ -33,7 +30,7 @@ const Technology: React.FC = () => {
                     </div>
                     <div className="order-1 lg:order-2 space-y-8">
                         <span className="bg-blue-600 text-white px-4 py-1 rounded-full text-[10px] font-black uppercase tracking-widest">INFRAESTRUCTURA</span>
-                        <h2 className="text-4xl md:text-6xl font-black italic leading-tight">Gestión Inteligente de <span className="text-blue-500">Sucursales.</span></h2>
+                        <h2 className="text-4xl md:text-6xl font-black italic leading-tight">Gestión Inteligente de <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-blue-600">Sucursales.</span></h2>
                         <p className="text-gray-400 text-lg leading-relaxed">
                             TEIKON es el cerebro de DOCFON. Permite a cada dueño ver el rendimiento de sus técnicos, el stock disponible en tiempo real y la rentabilidad por minuto.
                         </p>
@@ -52,7 +49,7 @@ const Technology: React.FC = () => {
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
                     <div className="space-y-8">
                         <span className="bg-orange-500 text-white px-4 py-1 rounded-full text-[10px] font-black uppercase tracking-widest">AUTOMATIZACIÓN</span>
-                        <h2 className="text-4xl md:text-6xl font-black italic leading-tight">Ventas y Fidelización vía <span className="text-orange-500">WhatsApp.</span></h2>
+                        <h2 className="text-4xl md:text-6xl font-black italic leading-tight">Ventas y Fidelización vía <span className="text-transparent bg-clip-text bg-gradient-to-r from-pink-500 to-fuchsia-600">WhatsApp.</span></h2>
                         <p className="text-gray-400 text-lg leading-relaxed">
                             VISO se encarga de que ningún cliente sea olvidado. Desde el aviso de reparación lista hasta promociones personalizadas basadas en el historial.
                         </p>
@@ -66,20 +63,10 @@ const Technology: React.FC = () => {
                         </ul>
                     </div>
                     <div className="relative">
-                        <div className="aspect-video bg-gradient-to-br from-orange-900 to-black rounded-[40px] border border-white/10 flex items-center justify-center overflow-hidden">
-                            <img src="https://picsum.photos/1200/800?ai=1" alt="Viso CRM" className="w-full h-full object-cover opacity-50" />
-                            <div className="absolute inset-0 bg-orange-600/10 flex flex-col justify-end p-12 space-y-4">
-                                <div className="w-1/2 h-12 bg-white/10 backdrop-blur rounded-2xl flex items-center px-4">
-                                    <div className="w-6 h-6 bg-orange-500 rounded-full mr-3"></div>
-                                    <div className="h-2 w-2/3 bg-white/20 rounded-full"></div>
-                                </div>
-                                <div className="w-2/3 h-12 bg-orange-500/20 backdrop-blur rounded-2xl flex items-center px-4 self-end">
-                                    <div className="h-2 w-2/3 bg-orange-400 rounded-full mr-3"></div>
-                                    <div className="w-6 h-6 bg-white rounded-full"></div>
-                                </div>
-                            </div>
+                        <div className="aspect-video bg-gradient-to-br from-fuchsia-900 to-black rounded-[40px] border border-fuchsia-500/30 flex items-center justify-center overflow-hidden shadow-[0_0_40px_rgba(236,72,153,0.3)] p-4">
+                            <img src={visoImg} alt="Viso CRM" className="w-full h-full object-contain drop-shadow-[0_0_15px_rgba(236,72,153,0.8)]" />
                         </div>
-                        <div className="absolute -top-10 -left-10 bg-black text-white p-8 rounded-3xl shadow-2xl max-w-xs border-4 border-orange-500">
+                        <div className="absolute -top-10 -left-10 bg-black text-white p-8 rounded-3xl shadow-2xl max-w-xs border-4 border-fuchsia-500">
                             <p className="font-black text-2xl italic">VISO</p>
                             <p className="text-xs font-bold text-gray-500 uppercase">WHATSAPP &amp; CRM</p>
                             <div className="mt-4 space-y-2">
