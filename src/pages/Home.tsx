@@ -1,39 +1,62 @@
 
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { motion } from 'framer-motion';
 import { Icons } from '../constants';
 
 const Home: React.FC = () => {
     return (
         <div className="relative overflow-hidden">
             {/* Hero Section */}
-            <section className="relative pt-28 pb-20 md:pt-40 md:pb-32 px-6 bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-blue-900/20 via-black to-black">
-                <div className="max-w-7xl mx-auto text-center space-y-8 relative z-10">
-                    <div className="inline-flex items-center space-x-2 bg-white/5 border border-white/10 rounded-full px-4 py-2 text-xs font-bold tracking-widest text-orange-500 uppercase animate-pulse">
-                        <span className="w-2 h-2 bg-orange-500 rounded-full"></span>
+            <section className="relative pt-24 pb-16 md:pt-32 md:pb-24 px-6 bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-blue-900/20 via-black to-black">
+                <div className="max-w-7xl mx-auto text-center relative z-10">
+                    <motion.div
+                        initial={{ opacity: 0, y: 16 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.45 }}
+                        className="inline-flex items-center space-x-2 bg-white/5 border border-white/10 rounded-full px-4 py-2 text-xs font-bold tracking-widest text-orange-500 uppercase mb-6"
+                    >
+                        <span className="w-2 h-2 bg-orange-500 rounded-full animate-pulse"></span>
                         <span>Nueva convocatoria Academia 2024 Abierta</span>
-                    </div>
-                    <h1 className="text-5xl md:text-8xl font-black tracking-tighter leading-tight max-w-5xl mx-auto">
-                        Aprende reparación profesional y abre tu <span className="gradient-text">propia franquicia tecnológica.</span>
-                    </h1>
-                    <p className="text-xl md:text-2xl text-gray-400 max-w-3xl mx-auto leading-relaxed">
-                        Academia certificada, marketplace técnico y franquicias listas para escalar en todo México. El ecosistema completo para el técnico moderno.
-                    </p>
+                    </motion.div>
 
-                    <div className="flex flex-col md:flex-row items-center justify-center gap-6 pt-10">
-                        <Link to="/academia" className="w-full md:w-auto flex items-center justify-center space-x-3 px-10 py-5 bg-orange-500 text-white rounded-2xl font-bold text-lg hover:bg-orange-600 transition-all shadow-[0_0_40px_rgba(255,107,0,0.3)] hover:-translate-y-1">
+                    <motion.h1
+                        initial={{ opacity: 0, y: 24 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.5, delay: 0.1 }}
+                        className="text-5xl md:text-7xl font-black tracking-tighter leading-[1.05] max-w-5xl mx-auto mb-6"
+                    >
+                        Aprende a reparar celulares y abre tu <span className="gradient-text">propia sucursal tecnológica.</span>
+                    </motion.h1>
+
+                    <motion.p
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.5, delay: 0.2 }}
+                        className="text-xl text-gray-400 max-w-3xl mx-auto leading-relaxed mb-10"
+                    >
+                        Academia certificada, marketplace técnico y franquicias listas para escalar en todo México. El ecosistema completo para el técnico moderno.
+                    </motion.p>
+
+                    <motion.div
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.5, delay: 0.3 }}
+                        className="flex flex-col md:flex-row items-center justify-center gap-4"
+                    >
+                        <Link to="/academia" className="w-full md:w-auto flex items-center justify-center space-x-3 px-10 py-5 bg-orange-500 text-white rounded-2xl font-bold text-lg hover:bg-orange-600 transition-all shadow-[0_0_40px_rgba(255,107,0,0.4)] hover:-translate-y-1">
                             <Icons.Academy className="w-6 h-6" />
                             <span>IR A ACADEMIA</span>
                         </Link>
-                        <Link to="/marketplace" className="w-full md:w-auto flex items-center justify-center space-x-3 px-10 py-5 bg-blue-600 text-white rounded-2xl font-bold text-lg hover:bg-blue-700 transition-all shadow-[0_0_40px_rgba(0,102,255,0.3)] hover:-translate-y-1">
+                        <Link to="/marketplace" className="w-full md:w-auto flex items-center justify-center space-x-3 px-10 py-4 bg-white/5 border border-white/20 text-white rounded-2xl font-bold text-lg hover:bg-white/10 transition-all hover:-translate-y-1">
                             <Icons.Cart className="w-6 h-6" />
                             <span>MARKETPLACE</span>
                         </Link>
-                        <Link to="/franchise" className="w-full md:w-auto flex items-center justify-center space-x-3 px-10 py-5 bg-white text-black rounded-2xl font-bold text-lg hover:bg-gray-100 transition-all hover:-translate-y-1">
+                        <Link to="/franchise" className="w-full md:w-auto flex items-center justify-center space-x-3 px-10 py-4 bg-white/5 border border-white/20 text-white rounded-2xl font-bold text-lg hover:bg-white/10 transition-all hover:-translate-y-1">
                             <Icons.Franchise className="w-6 h-6" />
                             <span>FRANQUICIAS</span>
                         </Link>
-                    </div>
+                    </motion.div>
                 </div>
 
                 {/* Decorative Background Elements */}
@@ -55,6 +78,27 @@ const Home: React.FC = () => {
                             <p className="text-sm font-bold text-gray-500 uppercase tracking-widest">{stat.label}</p>
                         </div>
                     ))}
+                </div>
+            </section>
+
+            {/* Social Proof — Logos */}
+            <section className="py-10 bg-black">
+                <div className="max-w-7xl mx-auto px-6 text-center">
+                    <p className="text-xs font-bold uppercase tracking-widest text-gray-600 mb-8">Empresas y talleres que confían en nosotros</p>
+                    <div className="flex flex-wrap items-center justify-center gap-6 md:gap-10 opacity-50">
+                        {[
+                            'TechFix Pro',
+                            'Celular Express',
+                            'iRepair MX',
+                            'Grupo Servitel',
+                            'Smart Repair',
+                            'Moviltek',
+                        ].map((name, i) => (
+                            <div key={i} className="px-5 py-2.5 bg-white/5 border border-white/10 rounded-xl text-sm font-bold text-gray-400 tracking-wider hover:opacity-100 hover:text-white hover:border-white/20 transition-all">
+                                {name}
+                            </div>
+                        ))}
+                    </div>
                 </div>
             </section>
 

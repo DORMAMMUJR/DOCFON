@@ -122,10 +122,10 @@ const BecaForm: React.FC = () => {
 
 const Academia: React.FC = () => {
     return (
-        <div className="pt-28 pb-16">
+        <div className="pt-24 pb-12">
             {/* Header / Hero Banner */}
-            <section className="max-w-7xl mx-auto px-6 mb-20 text-center">
-                <div className="relative w-full h-64 md:h-[420px] rounded-[40px] overflow-hidden mb-10 border border-white/10 shadow-2xl">
+            <section className="max-w-7xl mx-auto px-6 mb-14 text-center">
+                <div className="relative w-full h-56 md:h-[380px] rounded-[40px] overflow-hidden mb-8 border border-white/10 shadow-2xl">
                     <img src="https://images.unsplash.com/photo-1581092160562-40aa08e78837?auto=format&fit=crop&q=80" alt="Academia DOCFON Portada" className="w-full h-full object-cover" />
                     <div className="absolute inset-0 bg-gradient-to-t from-black via-black/60 to-transparent flex flex-col justify-end p-8 md:p-16 text-center">
                         <h1 className="text-5xl md:text-7xl font-black italic mb-6">Academia <span className="text-orange-500">DOCFON</span></h1>
@@ -137,7 +137,7 @@ const Academia: React.FC = () => {
             </section>
 
             {/* Stats row */}
-            <section className="bg-white/5 py-10 mb-16 border-y border-white/5">
+            <section className="bg-white/5 py-8 mb-12 border-y border-white/5">
                 <div className="max-w-7xl mx-auto px-6 grid grid-cols-2 md:grid-cols-4 gap-8">
                     <div className="text-center"><p className="text-3xl font-black">98%</p><p className="text-xs text-gray-500 uppercase tracking-widest font-bold">Tasa de Empleabilidad</p></div>
                     <div className="text-center"><p className="text-3xl font-black">100+</p><p className="text-xs text-gray-500 uppercase tracking-widest font-bold">Talleres Aliados</p></div>
@@ -147,7 +147,7 @@ const Academia: React.FC = () => {
             </section>
 
             {/* Courses Grid */}
-            <section className="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-20">
+            <section className="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-14">
                 {courses.map((course) => (
                     <div key={course.id} className="group bg-black border border-white/10 rounded-3xl overflow-hidden hover:border-orange-500/50 transition-all hover:shadow-[0_0_30px_rgba(255,107,0,0.1)] flex flex-col">
                         <div className="h-48 relative overflow-hidden flex-shrink-0">

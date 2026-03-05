@@ -28,7 +28,8 @@ const MOCK_PRODUCTS: Product[] = [
         category: 'Refacciones',
         price: 250,
         image: CentroCarga1,
-        images: [CentroCarga1, CentroCarga2, CentroCarga3]
+        images: [CentroCarga1, CentroCarga2, CentroCarga3],
+        badge: 'Más vendido' as const
     },
     {
         id: '2',
@@ -36,7 +37,8 @@ const MOCK_PRODUCTS: Product[] = [
         category: 'Pantallas',
         price: 1200,
         image: Display1,
-        images: [Display1, Display2, Display3]
+        images: [Display1, Display2, Display3],
+        badge: 'Nuevo' as const
     },
     {
         id: '3',
@@ -52,7 +54,8 @@ const MOCK_PRODUCTS: Product[] = [
         category: 'Equipamiento',
         price: 500,
         image: Equipamiento1,
-        images: [Equipamiento1, Equipamiento1, Equipamiento1]
+        images: [Equipamiento1, Equipamiento1, Equipamiento1],
+        badge: 'Oferta' as const
     },
     {
         id: '5',
@@ -60,7 +63,8 @@ const MOCK_PRODUCTS: Product[] = [
         category: 'Fundas',
         price: 150,
         image: Accesorio1,
-        images: [Accesorio1, Accesorio2, Accesorio3]
+        images: [Accesorio1, Accesorio2, Accesorio3],
+        badge: 'Nuevo' as const
     }
 ];
 
@@ -85,6 +89,19 @@ const ProductCard = ({ product, addToCart }: { product: Product, addToCart: (p: 
             <div className="aspect-square relative flex flex-col bg-gray-900 overflow-hidden">
                 <div className="flex-1 w-full h-full relative">
                     <img src={mainImage} alt={product.name} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" />
+                    {/* Badge de producto */}
+                    {product.badge && (() => {
+                        const badgeStyles: Record<string, string> = {
+                            'Nuevo': 'bg-green-500',
+                            'Oferta': 'bg-red-500',
+                            'Más vendido': 'bg-orange-500',
+                        };
+                        return (
+                            <div className={`absolute top-3 left-3 ${badgeStyles[product.badge!] ?? 'bg-gray-600'} text-white text-[10px] font-black px-3 py-1 rounded-full uppercase tracking-widest z-10 shadow-lg`}>
+                                {product.badge}
+                            </div>
+                        );
+                    })()}
                     {product.isBulk && (
                         <div className="absolute top-4 right-4 bg-blue-600 text-white text-[10px] font-black px-3 py-1 rounded-full uppercase z-10">
                             MAYOREO
