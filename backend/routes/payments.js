@@ -1,12 +1,14 @@
 const express = require('express');
-const Stripe = require('stripe');
 const { Pool } = require('pg');
 
 const router = express.Router();
 
-const stripe = new Stripe(process.env.STRIPE_SECRET_KEY, {
-    apiVersion: '2023-10-16', // Versión fija por seguridad
-});
+// Stripe se inicializa de forma lazy para no crashear si la key no está configurada
+const getStripe = () => {
+    const key = process.env.STRIPE_SECRET_KEY;
+    if (!key) throw new Error('STRIPE_SECRET_KEY no configurada en variables de entorno.');
+    return require('stripe')(key, { apiVersion: '2023-10-16' });
+};
 
 const pool = new Pool({
     connectionString: process.env.DATABASE_URL,
@@ -17,11 +19,17 @@ const pool = new Pool({
 // POST /api/payments/create-checkout-session
 // ────────────────────────────────────────
 router.post('/create-checkout-session', async (req, res) => {
-    // 1. Recibe carrito y datos de envío desde el frontend
     const { items, shippingAddress, userId = null } = req.body;
 
     if (!items || items.length === 0) {
         return res.status(400).json({ error: 'El carrito está vacío.' });
+    }
+
+    let stripe;
+    try {
+        stripe = getStripe();
+    } catch (e) {
+        return res.status(503).json({ error: 'Pagos no disponibles: ' + e.message });
     }
 
     try {

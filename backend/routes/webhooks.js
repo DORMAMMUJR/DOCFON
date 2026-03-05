@@ -1,12 +1,15 @@
 // webhook.js
 const express = require('express');
-const Stripe = require('stripe');
 const { Pool } = require('pg');
 
 const router = express.Router();
-const stripe = new Stripe(process.env.STRIPE_SECRET_KEY, {
-    apiVersion: '2023-10-16',
-});
+
+// Stripe lazy: no crashea si las keys no están en el entorno
+const getStripe = () => {
+    const key = process.env.STRIPE_SECRET_KEY;
+    if (!key) throw new Error('STRIPE_SECRET_KEY no configurada.');
+    return require('stripe')(key, { apiVersion: '2023-10-16' });
+};
 
 const pool = new Pool({
     connectionString: process.env.DATABASE_URL,
@@ -22,6 +25,11 @@ const endpointSecret = process.env.STRIPE_WEBHOOK_SECRET;
 // por lo que express.raw() debe usarse ANTES del express.json()
 // Este archivo espera que server.js maneje el body parser correctamente.
 router.post('/stripe', express.raw({ type: 'application/json' }), async (req, res) => {
+    if (!process.env.STRIPE_SECRET_KEY || !endpointSecret) {
+        return res.status(503).send('Webhook no configurado: faltan variables de entorno de Stripe.');
+    }
+
+    const stripe = getStripe();
     const sig = req.headers['stripe-signature'];
     let event;
 
