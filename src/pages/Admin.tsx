@@ -202,7 +202,7 @@ const Admin: React.FC = () => {
                                         <td className="p-4 text-right space-x-2">
                                             <button className="px-3 py-1 bg-white/10 rounded text-xs hover:bg-white/20">Editar</button>
                                             <button
-                                                onClick={() => handleDelete(p.id)}
+                                                onClick={() => handleDelete(String(p.id))}
                                                 className="px-3 py-1 bg-red-500/10 text-red-500 rounded text-xs hover:bg-red-500/20"
                                             >
                                                 Eliminar
