@@ -12,9 +12,15 @@ import Help from './pages/Help';
 import Terms from './pages/Terms';
 import Privacy from './pages/Privacy';
 import Locations from './pages/Locations';
+import Login from './pages/Login';
+import Admin from './pages/Admin';
+import Checkout from './pages/Checkout';
+import CheckoutSuccess from './pages/CheckoutSuccess';
+import TradeIn from './pages/TradeIn';
+import ProtectedRoute from './components/ProtectedRoute';
 import { Icons } from './constants';
 
-const WHATSAPP_NUMBER = '5215512345678'; // Actualizar con número real
+const WHATSAPP_NUMBER = '525541893360';
 
 const App: React.FC = () => {
     return (
@@ -32,6 +38,19 @@ const App: React.FC = () => {
                     <Route path="/terms" element={<Terms />} />
                     <Route path="/privacy" element={<Privacy />} />
                     <Route path="/locations" element={<Locations />} />
+                    <Route path="/checkout" element={<Checkout />} />
+                    <Route path="/checkout/success" element={<CheckoutSuccess />} />
+                    <Route path="/vender-telefono" element={<TradeIn />} />
+
+                    <Route path="/login" element={<Login />} />
+                    <Route
+                        path="/admin"
+                        element={
+                            <ProtectedRoute adminOnly>
+                                <Admin />
+                            </ProtectedRoute>
+                        }
+                    />
                 </Routes>
             </main>
             <Footer />
@@ -42,7 +61,7 @@ const App: React.FC = () => {
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="Contactar por WhatsApp"
-                className="fixed bottom-8 right-8 z-50 bg-[#25D366] text-white p-4 rounded-full shadow-2xl hover:scale-110 transition-transform flex items-center justify-center"
+                className="fixed bottom-8 right-8 z-50 bg-[#25D366] text-white p-4 rounded-full shadow-2xl hover:scale-110 transition-transform flex items-center justify-center animate-pulse"
             >
                 <Icons.Whatsapp className="w-8 h-8" />
             </a>

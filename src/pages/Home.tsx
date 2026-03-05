@@ -7,14 +7,14 @@ const Home: React.FC = () => {
     return (
         <div className="relative overflow-hidden">
             {/* Hero Section */}
-            <section className="relative pt-40 pb-32 md:pt-56 md:pb-48 px-6 bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-blue-900/20 via-black to-black">
+            <section className="relative pt-28 pb-20 md:pt-40 md:pb-32 px-6 bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-blue-900/20 via-black to-black">
                 <div className="max-w-7xl mx-auto text-center space-y-8 relative z-10">
                     <div className="inline-flex items-center space-x-2 bg-white/5 border border-white/10 rounded-full px-4 py-2 text-xs font-bold tracking-widest text-orange-500 uppercase animate-pulse">
                         <span className="w-2 h-2 bg-orange-500 rounded-full"></span>
                         <span>Nueva convocatoria Academia 2024 Abierta</span>
                     </div>
                     <h1 className="text-5xl md:text-8xl font-black tracking-tighter leading-tight max-w-5xl mx-auto">
-                        DOCFON – Aprende, repara y abre tu <span className="gradient-text">propia sucursal tecnológica.</span>
+                        Aprende reparación profesional y abre tu <span className="gradient-text">propia franquicia tecnológica.</span>
                     </h1>
                     <p className="text-xl md:text-2xl text-gray-400 max-w-3xl mx-auto leading-relaxed">
                         Academia certificada, marketplace técnico y franquicias listas para escalar en todo México. El ecosistema completo para el técnico moderno.
@@ -42,7 +42,7 @@ const Home: React.FC = () => {
             </section>
 
             {/* Metrics Section */}
-            <section className="py-20 bg-black border-y border-white/5">
+            <section className="py-14 bg-black border-y border-white/5">
                 <div className="max-w-7xl mx-auto px-6 grid grid-cols-2 md:grid-cols-4 gap-12">
                     {[
                         { label: 'Técnicos Certificados', value: '15,000+' },
@@ -59,7 +59,7 @@ const Home: React.FC = () => {
             </section>
 
             {/* Technology Focus Section */}
-            <section className="py-32 bg-black overflow-hidden">
+            <section className="py-20 bg-black overflow-hidden">
                 <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
                     <div className="space-y-8">
                         <h2 className="text-4xl md:text-6xl font-black leading-tight italic">
@@ -118,7 +118,7 @@ const Home: React.FC = () => {
             </section>
 
             {/* Testimonials */}
-            <section className="py-32 bg-white/5">
+            <section className="py-20 bg-white/5">
                 <div className="max-w-7xl mx-auto px-6">
                     <div className="text-center mb-20 space-y-4">
                         <h2 className="text-4xl md:text-5xl font-black italic">Testimonios de Éxito</h2>
@@ -148,7 +148,7 @@ const Home: React.FC = () => {
             </section>
 
             {/* Booking / CTA Section */}
-            <section className="py-32 px-6">
+            <section className="py-20 px-6">
                 <div className="max-w-5xl mx-auto bg-gradient-to-r from-blue-900 to-orange-900 p-1 rounded-[40px]">
                     <div className="bg-black rounded-[38px] p-12 md:p-20 text-center space-y-10">
                         <h2 className="text-4xl md:text-6xl font-black tracking-tighter italic">¿Listo para escalar al siguiente nivel?</h2>

@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { toast } from 'sonner';
 import { Icons } from '../constants';
 import { Product } from '../types';
 import { useCartStore } from '../store/useCartStore';
@@ -16,8 +17,8 @@ import Herramienta2 from '../assets/marketplace/herramientas/pistola_calor_2.jpg
 
 import Equipamiento1 from '../assets/marketplace/equipamiento/Kit_herramienta.jpg';
 
-import Accesorio1 from '../assets/marketplace/accesorios/Funda_iPhone 17_1.jpg';
-import Accesorio2 from '../assets/marketplace/accesorios/Funda_iPhone 17_2.jpg';
+import Accesorio1 from '../assets/marketplace/accesorios/Funda_iPhone17_1.jpg';
+import Accesorio2 from '../assets/marketplace/accesorios/Funda_iPhone17_2.jpg';
 import Accesorio3 from '../assets/marketplace/accesorios/Funda_iPhone17_3.jpg';
 
 const MOCK_PRODUCTS: Product[] = [
@@ -32,7 +33,7 @@ const MOCK_PRODUCTS: Product[] = [
     {
         id: '2',
         name: 'Display iPhone',
-        category: 'Displays',
+        category: 'Pantallas',
         price: 1200,
         image: Display1,
         images: [Display1, Display2, Display3]
@@ -56,15 +57,28 @@ const MOCK_PRODUCTS: Product[] = [
     {
         id: '5',
         name: 'Funda iPhone 17',
-        category: 'Accesorios',
+        category: 'Fundas',
         price: 150,
         image: Accesorio1,
         images: [Accesorio1, Accesorio2, Accesorio3]
     }
 ];
 
+const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000';
+
+const resolveImg = (src: string) => {
+    if (!src) return '';
+    // Si ya es una URL absoluta o un data URL de Vite (empieza con /)
+    if (src.startsWith('http') || src.startsWith('data:')) return src;
+    // Si es una ruta relativa del backend (ej: /uploads/foto.jpg)
+    return API_URL + src;
+};
+
 const ProductCard = ({ product, addToCart }: { product: Product, addToCart: (p: Product) => void }) => {
-    const [mainImage, setMainImage] = useState(product.images && product.images.length > 0 ? product.images[0] : product.image);
+    const allImages = product.images && product.images.length > 0
+        ? product.images
+        : [product.image];
+    const [mainImage, setMainImage] = useState(resolveImg(allImages[0]));
 
     return (
         <div className="group bg-white/5 border border-white/10 rounded-3xl overflow-hidden hover:border-white/30 transition-all flex flex-col">
@@ -78,17 +92,20 @@ const ProductCard = ({ product, addToCart }: { product: Product, addToCart: (p: 
                     )}
                 </div>
                 {/* Thumbnails */}
-                {product.images && product.images.length > 1 && (
+                {allImages.length > 1 && (
                     <div className="absolute bottom-0 left-0 right-0 flex bg-gradient-to-t from-black/80 to-transparent p-4 gap-3 justify-center z-10 mt-auto">
-                        {product.images.map((img, idx) => (
-                            <button
-                                key={idx}
-                                onClick={(e) => { e.stopPropagation(); setMainImage(img); }}
-                                className={`w-14 h-14 rounded-xl overflow-hidden border-2 transition-all shadow-lg ${mainImage === img ? 'border-blue-500 scale-110' : 'border-transparent opacity-60 hover:opacity-100 hover:scale-105'}`}
-                            >
-                                <img src={img} alt={`Thumb ${idx}`} className="w-full h-full object-cover" />
-                            </button>
-                        ))}
+                        {allImages.map((img, idx) => {
+                            const resolved = resolveImg(img);
+                            return (
+                                <button
+                                    key={idx}
+                                    onClick={(e) => { e.stopPropagation(); setMainImage(resolved); }}
+                                    className={`w-14 h-14 rounded-xl overflow-hidden border-2 transition-all shadow-lg ${mainImage === resolved ? 'border-blue-500 scale-110' : 'border-transparent opacity-60 hover:opacity-100 hover:scale-105'}`}
+                                >
+                                    <img src={resolved} alt={`Thumb ${idx}`} className="w-full h-full object-cover" />
+                                </button>
+                            );
+                        })}
                     </div>
                 )}
             </div>
@@ -103,8 +120,11 @@ const ProductCard = ({ product, addToCart }: { product: Product, addToCart: (p: 
                     <button
                         onClick={() => {
                             addToCart(product);
-                            console.log(`Producto agregado al carrito: ${product.name}`);
-                            alert(`¡Agregado al carrito!\n${product.name}`);
+                            toast.success(`¡${product.name} agregado!`, {
+                                description: `$${parseFloat(product.price.toString()).toLocaleString()} MXN`,
+                                duration: 3000,
+                                icon: '🛒',
+                            });
                         }}
                         className="w-12 h-12 bg-white text-black rounded-xl flex items-center justify-center hover:bg-orange-500 hover:text-white transition-colors"
                         title="Agregar al carrito"
@@ -123,27 +143,35 @@ const Marketplace: React.FC = () => {
     const [error, setError] = useState<string | null>(null);
     const [activeCategory, setActiveCategory] = useState('Todos');
     const addToCart = useCartStore((state) => state.addToCart);
-    const categories = ['Todos', 'Refacciones', 'Displays', 'Herramientas', 'Equipamiento', 'Accesorios'];
+    const categories = ['Todos', 'Refacciones', 'Pantallas', 'Herramientas', 'Fundas', 'Equipamiento'];
+    const isDev = import.meta.env.DEV;
+
+    const fetchProducts = async () => {
+        setLoading(true);
+        setError(null);
+        try {
+            const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000';
+            const response = await fetch(`${API_URL}/api/products`);
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            const data = await response.json();
+            setProducts(Array.isArray(data) ? data : data.data || []);
+        } catch (err) {
+            console.error("Failed to fetch products:", err);
+            if (isDev) {
+                // En desarrollo: usar mock para trabajar sin backend
+                setProducts(MOCK_PRODUCTS);
+            } else {
+                // En producción: mostrar error real, nunca datos fake
+                setError("No se pudieron cargar los productos.");
+            }
+        } finally {
+            setLoading(false);
+        }
+    };
 
     useEffect(() => {
-        const fetchProducts = async () => {
-            try {
-                const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000';
-                const response = await fetch(`${API_URL}/api/products`);
-                if (!response.ok) {
-                    throw new Error('Network response was not ok');
-                }
-                const data = await response.json();
-                setProducts(data);
-            } catch (err) {
-                console.error("Failed to fetch products:", err);
-                setProducts(MOCK_PRODUCTS);
-                // setError("No se pudieron cargar los productos. Por favor intenta más tarde.");
-            } finally {
-                setLoading(false);
-            }
-        };
-
         fetchProducts();
     }, []);
 
@@ -155,12 +183,15 @@ const Marketplace: React.FC = () => {
                         <h1 className="text-5xl md:text-7xl font-black italic">Marketplace <span className="text-blue-500">Técnico</span></h1>
                         <p className="text-xl text-gray-400 max-w-xl">El stock más confiable de México. Refacciones grado A+ y herramientas certificadas.</p>
                     </div>
-                    <div className="flex items-center space-x-4 bg-white/5 border border-white/10 p-2 rounded-2xl">
+                    <div className="flex flex-wrap gap-3 mt-6 md:mt-0">
                         {categories.map(cat => (
                             <button
                                 key={cat}
                                 onClick={() => setActiveCategory(cat)}
-                                className={`px-6 py-2 rounded-xl text-xs font-bold uppercase tracking-widest transition-all ${activeCategory === cat ? 'bg-white text-black' : 'text-gray-500 hover:text-white'}`}
+                                className={`px-5 py-2.5 rounded-full text-xs font-bold uppercase tracking-widest transition-all border ${activeCategory === cat
+                                    ? 'bg-orange-500 text-white border-orange-500 shadow-[0_0_15px_rgba(255,107,0,0.4)]'
+                                    : 'bg-white/5 text-gray-400 border-white/10 hover:text-white hover:border-white/30'
+                                    }`}
                             >
                                 {cat}
                             </button>
@@ -186,8 +217,32 @@ const Marketplace: React.FC = () => {
                         <span className="ml-4 text-xl font-bold text-gray-400">Cargando productos...</span>
                     </div>
                 ) : error ? (
-                    <div className="text-center py-20">
-                        <p className="text-red-500 text-xl font-bold">{error}</p>
+                    <div className="flex flex-col items-center justify-center py-32 text-center gap-6">
+                        <div className="w-20 h-20 rounded-full bg-yellow-500/10 border border-yellow-500/20 flex items-center justify-center text-4xl">
+                            🔧
+                        </div>
+                        <div className="space-y-2">
+                            <h3 className="text-2xl font-black text-white">Servicio en Mantenimiento</h3>
+                            <p className="text-gray-400 max-w-sm">
+                                Estamos actualizando nuestro catálogo. Vuelve en unos minutos o contáctanos por WhatsApp.
+                            </p>
+                        </div>
+                        <div className="flex gap-4">
+                            <button
+                                onClick={fetchProducts}
+                                className="px-6 py-3 bg-white text-black font-bold rounded-xl hover:bg-orange-500 hover:text-white transition-all"
+                            >
+                                Reintentar
+                            </button>
+                            <a
+                                href="https://wa.me/525541893360?text=Hola%2C+quiero+ver+el+cat%C3%A1logo+de+productos"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="px-6 py-3 bg-green-600 text-white font-bold rounded-xl hover:bg-green-700 transition-all"
+                            >
+                                WhatsApp
+                            </a>
+                        </div>
                     </div>
                 ) : (
                     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
